@@ -42,16 +42,18 @@ class Solution
         long long unsigned int decimalValue(Node *head)
         {
            // Your Code Here
-           long long s = 0;
-           while(head)
-           { 
-              s = s*2+head->data;
-               head = head->next;
-               s = s%1000000007;
+           Node *temp=head;
+           long long unsigned int s = 0;
+           long long mod = 1e9+7;
+           while(temp)
+           {
+               s=((s<<1)|temp->data)%mod;
+               temp =  temp->next;
            }
-           return s%1000000007;
+           return s;
         }
 };
+
 
 
 
