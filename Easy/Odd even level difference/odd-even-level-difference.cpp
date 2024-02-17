@@ -102,31 +102,21 @@ struct Node
 
 class Solution{
   public:
-    void recursion(Node* root, int level, map<int,int>&map){
+    int e=0,o=0;
+    void recursion(Node* root, int level){
         if(root==NULL) return;
-        if(map.find(level)!=map.end()){
-            int m = map[level];
-            map[level] = m+root->data;
-        }
-        else{
-            map[level] = root->data;
-        }
-        recursion(root->left,level+1,map);
-        recursion(root->right,level+1,map);
+        if(level%2==0) e+=root->data;
+        else o+=root->data;
+        recursion(root->left,level+1);
+        recursion(root->right,level+1);
     }
     /*You are required to complete this function*/
     int getLevelDiff(Node *root)
     {
        //Your code here
        map<int,int>map;
-       recursion(root,0,map);
-       int o = 0;
-       int e = 0;
-       for(auto it: map){
-           if(it.first%2==0) e+=it.second;
-           else o+=it.second;
-       }
-       return e-o;
+       recursion(root,1);
+       return o-e;
     }
 };
 
