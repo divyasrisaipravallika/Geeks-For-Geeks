@@ -41,30 +41,21 @@ struct Node
 class Solution
 {
     public:
-    void recursion(Node* root,int level,map<int,vector<int>>&map){
-        if(root==NULL) return;
-        if(map[level].size()>=1){
-            vector<int>v;
-            v = map[level];
-            v.push_back(root->data);
-            map[level] = v;
-        }
-        else{
-            map[level]={root->data};
-        }
-        recursion(root->left,level+1,map);
-        recursion(root->right,level+1,map);
-    }
     //Function to return the level order traversal of a tree.
     vector<int> levelOrder(Node* root)
     {
       //Your code here
-      map<int,vector<int>>map;
-      recursion(root,0,map);
+      queue<Node*>q;
       vector<int>v;
-      for(auto it:map){
-          for(auto i:it.second){
-              v.push_back(i);
+      q.push(root);
+      while(!q.empty()){
+          int s = q.size();
+          for(int i = 0 ; i<s; i++){
+              Node* temp = q.front();
+              q.pop();
+              v.push_back(temp->data);
+              if(temp->left!=NULL) q.push(temp->left);
+              if(temp->right!=NULL) q.push(temp->right);
           }
       }
       return v;
