@@ -117,7 +117,7 @@ struct Node
 class Solution
 {
 public:
-    void recursion(Node* root,int c,int sum,map<int,int>&map){
+   void recursion(Node* root,int c,int sum,map<int,int>&map){
         if(root==NULL){
             if(map.find(c)!=map.end()){
                 int m = map[c];
